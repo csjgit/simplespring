@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.google.protobuf' version '0.9.3'
 }
 
 group = 'com.example'
@@ -8,9 +9,36 @@ version = '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
+sourceSets {
+    main {
+        proto {
+            srcDir 'src/scripts' // Point to your custom proto folder
+        }
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.24.0"
+    }
+    generateProtoTasks {
+
+        all().each { task ->
+            task.builtins {
+                python { }
+            }
+        }
+    }
+}
+
+task copyPythonProto(type: Copy) {
+    from "$buildDir/generated/source/proto/main/python"
+    into "src/scripts"
+}
 
 dependencies {
     // Spring Core
+    implementation 'com.google.protobuf:protobuf-java:3.24.0'
     implementation 'org.springframework:spring-context:5.3.29'
     implementation 'org.springframework:spring-beans:5.3.29'
     // Apache Camel Core
