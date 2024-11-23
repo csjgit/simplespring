@@ -43,6 +43,8 @@ dependencies {
     implementation 'org.springframework:spring-beans:5.3.29'
     // Apache Camel Core
     implementation 'org.apache.camel:camel-core:3.21.0'
+    implementation 'org.apache.camel:camel-stream:3.21.0'
+
     implementation 'org.apache.camel:camel-spring:3.21.0'
     // Logging
     implementation 'org.slf4j:slf4j-api:1.7.36'

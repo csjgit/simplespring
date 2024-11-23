@@ -8,6 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 @ComponentScan(basePackages = "routes")
 public class AppConfig {
+
     @Bean
     public HelloService helloService() {
         return new HelloService();
@@ -22,4 +23,10 @@ public class AppConfig {
             System.out.println("Hello from Spring without Spring Boot!");
         }
     }
+
+    @Bean
+    public SampleObject thirdClass() {
+        return new SampleObject();
+    }
+
 }

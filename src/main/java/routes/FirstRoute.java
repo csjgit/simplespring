@@ -8,8 +8,12 @@ import org.springframework.stereotype.Component;
 public class FirstRoute extends RouteBuilder {
     @Override
     public void configure() {
-        from("direct:first")
-                .log("First Route received: ${body}")
-                .to("direct:second");
+
+        // Flow 1: Read CSV file and unmarshal to Order objects
+        from("file:input1/").log("Reading file: ${header.CamelFileName}")
+                .to("direct:third");
+
+
+        from("direct:third").bean(SampleObject.class,"test(2)");
     }
 }
